@@ -2,6 +2,7 @@ package com.projectcrm.dao;
 
 import com.projectcrm.entity.Customer;
 import java.util.List;
+import java.util.Objects;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,11 +24,16 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public void saveCustomer(Customer customer) {
         Customer temp = null;
+        System.out.println("Printing tempCustomer ....");
         var session = sessionFactory.getCurrentSession();
         temp = session.find(Customer.class, customer.getId());
+        System.out.println("temp customer gotten, status = " + 
+                (Objects.isNull(temp) ? 00000 : 111111));
         if (temp == null) {
+            System.out.println("Customer is nullll....");
             session.persist(customer);
         } else {
+            System.out.println("Customer is not");
             session.merge(customer);
         }
     }
