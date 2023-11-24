@@ -25,6 +25,12 @@ public class CustomerDAOImpl implements CustomerDAO {
     public void saveCustomer(Customer customer) {
         Customer temp = null;
         System.out.println("Printing tempCustomer ...." + customer.getId() + " <====");
+        if(customer.getId() == 0) {
+            System.out.println("yesssssss errorr");
+        } else {
+            System.out.println("Nooooooooooo");
+            System.out.println(customer.getId());
+        }
         var session = sessionFactory.getCurrentSession();
         temp = session.find(Customer.class, customer.getId());
         System.out.println("temp customer gotten, status = " + 
