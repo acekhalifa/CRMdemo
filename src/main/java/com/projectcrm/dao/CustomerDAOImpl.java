@@ -24,13 +24,13 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public void saveCustomer(Customer customer) {
         Customer temp = null;
-        System.out.println("Printing tempCustomer ....");
+        System.out.println("Printing tempCustomer ...." + customer.getId() + " <====");
         var session = sessionFactory.getCurrentSession();
         temp = session.find(Customer.class, customer.getId());
         System.out.println("temp customer gotten, status = " + 
                 (Objects.isNull(temp) ? 00000 : 111111));
         if (temp == null) {
-            System.out.println("Customer is nullll....");
+            System.out.println("Customer is nullll....----");
             session.persist(customer);
         } else {
             System.out.println("Customer is not");
