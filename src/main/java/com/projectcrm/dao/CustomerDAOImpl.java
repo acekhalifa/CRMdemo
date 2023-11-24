@@ -38,4 +38,13 @@ public class CustomerDAOImpl implements CustomerDAO {
         return customer;
     }
 
+    @Override
+    public void deleteCustomer(int id) {
+        var session = sessionFactory.getCurrentSession();
+        var query = session.createMutationQuery("from customer where id:=customerId");
+        query.setParameter("customerId", id);
+        int r = query.executeUpdate();
+        System.out.println("Query executed. Row affected == " + r);
+    }
+
 }
