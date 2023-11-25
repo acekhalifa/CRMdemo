@@ -2,6 +2,8 @@ package com.projectcrm.controller;
 
 import com.projectcrm.entity.Customer;
 import com.projectcrm.service.CustomerService;
+import com.projectcrm.util.SortUtils;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,15 @@ public class CustomerController {
     private CustomerService customerService;
 
     @RequestMapping("/list")
-    public String listCustomers(Model model) {
-        var customers = customerService.getCustomers();
+    public String listCustomers(Model model, @RequestParam(required = false) String sort) {
+        List<Customer> customers = null;
+        if(sort != null){
+            int sortKey = Integer.parseInt(sort);
+            customers = customerService.getCustomers(sortKey);
+        }
+        else{
+            customers = customerService.getCustomers(SortUtils.LAST_NAME);
+        }
         model.addAttribute("customers", customers);
         return "list-customers";
     }

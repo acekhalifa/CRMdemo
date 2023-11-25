@@ -15,8 +15,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     @Override
-    public List<Customer> getCustomers() {
-        return customerDAO.getCustomers();
+    public List<Customer> getCustomers(int sortKey) {
+        return customerDAO.getCustomers(sortKey);
     }
 
     @Transactional

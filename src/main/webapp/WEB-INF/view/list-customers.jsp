@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.projectcrm.util.SortUtils" %>
+
 
 <!DOCTYPE html>
 
@@ -33,11 +35,20 @@
                        />
                 <!--  add our html table here -->
 
+                <c:url var="sortLinkFirstName" value="/customer/list" >
+                    <c:param name="sort" value="<%= Integer.toString(SortUtils.FIRST_NAME)%>"/>
+                        </c:url>
+                <c:url var="sortLinkLastName" value="/customer/list" >
+                    <c:param name="sort" value="<%= Integer.toString(SortUtils.LAST_NAME)%>"/>
+                        </c:url>
+                <c:url var="sortLinkEmail" value="/customer/list" >
+                    <c:param name="sort" value="<%= Integer.toString(SortUtils.EMAIL)%>"/>
+                        </c:url>
                 <table>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
+                        <th><a href="${sortLinkFirstName}">First Name</a></th>
+                        <th><a href="${sortLinkLastName}">Last Name</a></th>
+                        <th><a href="${sortLinkEmail}">Email</a></th>
                         <th>Action</th>
                     </tr>
 
