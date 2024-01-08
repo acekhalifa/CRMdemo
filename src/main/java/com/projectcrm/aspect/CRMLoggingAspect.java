@@ -23,10 +23,10 @@ public class CRMLoggingAspect {
     @Pointcut("execution(* com.projectcrm.service.*.*(..))")
     private void forServicePackage(){}
     
-    @Pointcut("forControllerPackage || forDaoPackage || forServicePackage")
+    @Pointcut("forControllerPackage() || forDaoPackage() || forServicePackage()")
     private void appFlow(){}
     
-    @Before("appflow()")
+    @Before("appFlow()")
     public void CRMBeforeAdvice(JoinPoint joinPoint){
         myLogger.log(Level.INFO, "====> In @Before. Executing method: {0}", joinPoint.toShortString());
         var args = joinPoint.getArgs();
@@ -35,7 +35,7 @@ public class CRMLoggingAspect {
         }  
     }
     
-    @AfterReturning(pointcut = "appflow()", returning = "result")
+    @AfterReturning(pointcut = "appFlow()", returning = "result")
     public void CRMAfterReturningAdvice(JoinPoint joinPoint, Object result){
         myLogger.log(Level.INFO, "====> In @AfterReturning. Executing method: {0}", joinPoint.toShortString());
         myLogger.log(Level.INFO, "====> result: {0}", result);
